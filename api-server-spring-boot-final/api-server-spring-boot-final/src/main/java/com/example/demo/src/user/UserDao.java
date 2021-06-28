@@ -20,24 +20,18 @@ public class UserDao {
     }
 
     public List<GetUserRes> getUsers(String email){
-        return this.jdbcTemplate.query("select * from UserInfo where email =?",
+        return this.jdbcTemplate.query("select * from User",
                 (rs, rowNum) -> new GetUserRes(
-                        rs.getInt("userIdx"),
-                        rs.getString("userName"),
-                        rs.getString("ID"),
-                        rs.getString("Email"),
-                        rs.getString("password")),
-                email);
+                        rs.getInt("idx"),
+                        rs.getString("userId"))
+                );
     }
 
     public GetUserRes getUser(int userIdx){
-        return this.jdbcTemplate.queryForObject("select * from UserInfo where userIdx = ?",
+        return this.jdbcTemplate.queryForObject("select * from User where idx = ?",
                 (rs, rowNum) -> new GetUserRes(
-                        rs.getInt("userIdx"),
-                        rs.getString("userName"),
-                        rs.getString("ID"),
-                        rs.getString("Email"),
-                        rs.getString("password")),
+                        rs.getInt("idx"),
+                        rs.getString("userId")),
                 userIdx);
     }
 
